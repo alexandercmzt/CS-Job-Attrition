@@ -3,6 +3,7 @@ import sqlite3
 from pprint import pprint
 import matplotlib.pyplot as plt, mpld3
 import numpy as np
+import sys, json
 
 conn = sqlite3.connect("members.db")
 
@@ -16,7 +17,7 @@ def get_columns(col_name, y_cols):
 		cols.append([x[0] for x in cursor.fetchall()])	
 	return np.asarray(cols).T
 
-def numerical_plot(x_var, y_var, scatter = False, school_filter = None):
+def numerical_plot(x_var, y_var, scatter = False, school_filter = ""):
 	#Getting the data and formatting it
 	if y_var == "large":
 		matrix = get_columns(x_var, ["L1", "L2", "L3", "L4", "L5", "SCHOOL"])
@@ -25,7 +26,7 @@ def numerical_plot(x_var, y_var, scatter = False, school_filter = None):
 	else:
 		matrix = get_columns(x_var, ["S1", "S2", "S3", "S4", "S5", "SCHOOL"])
 
-	if school_filter:
+	if school_filter != "":
 		matrix =  matrix.tolist()
 		matrix = np.array([row for row in matrix if row[0] != None and row[1] != None and row[1] != 0.0]).T
 		matrix = matrix.T.tolist()
@@ -103,7 +104,7 @@ def numerical_plot(x_var, y_var, scatter = False, school_filter = None):
 
 
 
-def categorical_plot(x_var, y_var, school_filter = None):
+def categorical_plot(x_var, y_var, school_filter = ""):
 	#Getting the data and formatting it
 	if y_var == "large":
 		matrix = get_columns(x_var, ["L1", "L2", "L3", "L4", "L5", "SCHOOL"])
@@ -112,7 +113,7 @@ def categorical_plot(x_var, y_var, school_filter = None):
 	else:
 		matrix = get_columns(x_var, ["S1", "S2", "S3", "S4", "S5", "SCHOOL"])
 
-	if school_filter:
+	if school_filter != "":
 		matrix =  matrix.tolist()
 		matrix = np.array([row for row in matrix if row[0] != None and row[1] != None and row[1] != 0.0]).T
 		matrix = matrix.T.tolist()
@@ -175,19 +176,18 @@ def categorical_plot(x_var, y_var, school_filter = None):
 		plt.tight_layout()
 	return fig
 
-data = sys.stdin.read()
-j = json.loads(data)
-if j['x'] in ["CGPA", "MGPA", "GRAD", "INTERNS"]:
-	output_plot = numerical_plot(j['x'], j['company_size'], school_filter = j['school'])
-else:
-	output_plot = categorical_plot(j['x'], j['company_size'], school_filter = j['school'])
-output_json = mpld3.fig_to_dict(output_plot)
-print "Content-Type: text/plain;charset=utf-8"
-print
-print output_json
+# data = sys.stdin.read()
+# j = json.loads(data)
+# if j['x'] in ["CGPA", "MGPA", "GRAD", "INTERNS"]:
+# 	output_plot = numerical_plot(j['x'], j['company_size'], school_filter = j['school'])
+# else:
+# 	output_plot = categorical_plot(j['x'], j['company_size'], school_filter = j['school'])
+# output_json = mpld3.fig_to_html(output_plot)
 
-# output_plot = categorical_plot('EDUC', 'large', school_filter = "University of Toronto")
-# plt.show()
+# print output_json
+
+output_plot = numerical_plot('MGPA', 'large', school_filter = "University of Toronto")
+mpld3.show()
 
 conn.close()
 
