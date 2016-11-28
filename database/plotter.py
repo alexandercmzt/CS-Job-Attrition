@@ -187,6 +187,8 @@ def categorical_plot(x_var, y_var, school_filter = ""):
 # print output_json
 
 output_plot = numerical_plot('MGPA', 'large', school_filter = "University of Toronto")
+output_json = mpld3.fig_to_html(output_plot)
+print output_json
 mpld3.show()
 
 conn.close()
