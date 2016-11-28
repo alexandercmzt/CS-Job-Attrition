@@ -82,15 +82,15 @@ try:
     ref.write("\n")
     ref.write(json.getvalue('S5'))
     ref.write("\n")
-    #conn = sqlite3.connect("database/members.db")
+    conn = sqlite3.connect("members.db")
     print "db opened\n"
-    #cur = conn.cursor()
-    # cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD) VALUES ('usertest','passtest');")
-	print "execute"
+    cur = conn.cursor()
+    cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD) VALUES ('abcdtest','efghtest');")
+    print "execute"
     #cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD, CGPA, MGPA, GRAD, SCHOOL, MAJOR, SPONSOR, PORT, GITHUB, LNKDIN, INTERNS, EDUC, L1, L2, L3, L4, L5, M1, M2, M3, M4, M5, S1, S2, S3, S4, S5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (name, passwd, cgpa, mgpa, grad, school, major, sponsor, port, github, lnkdin, interns, educ, L1, L2, L3, L4, L5, M1, M2, M3, M4, M5, S1, S2, S3, S4, S5))
     #cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD) VALUES (?, ?);", (json.getvalue('username'), json.getvalue('password')))
-	#cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD, CGPA, MGPA, GRAD, SCHOOL, MAJOR, SPONSOR, PORT, GITHUB, LNKDIN, INTERNS, EDUC, L1, L2, L3, L4, L5, M1, M2, M3, M4, M5, S1, S2, S3, S4, S5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (json.getvalue('username'), json.getvalue('password'), float(json.getvalue('cgpa')), float(json.getvalue('mgpa')), int(json.getvalue('grad')), json.getvalue('school'), json.getvalue('major'), sponsor, port, github, lnkdin, int(json.getvalue('interns')), json.getvalue('educ'), int(json.getvalue('L1')), int(json.getvalue('L2')), int(json.getvalue('L3')), int(json.getvalue('L4')), int(json.getvalue('L5')), int(json.getvalue('M1')), int(json.getvalue('M2')), int(json.getvalue('M3')), int(json.getvalue('M4')), int(json.getvalue('M5')), int(json.getvalue('S1')), int(json.getvalue('S2')), int(json.getvalue('S3')), int(json.getvalue('S4')), int(json.getvalue('S5'))))
-	#conn.commit()
+    #cur.execute("INSERT INTO MEMBERS (UNAME, PASSWD, CGPA, MGPA, GRAD, SCHOOL, MAJOR, SPONSOR, PORT, GITHUB, LNKDIN, INTERNS, EDUC, L1, L2, L3, L4, L5, M1, M2, M3, M4, M5, S1, S2, S3, S4, S5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (json.getvalue('username'), json.getvalue('password'), float(json.getvalue('cgpa')), float(json.getvalue('mgpa')), int(json.getvalue('grad')), json.getvalue('school'), json.getvalue('major'), sponsor, port, github, lnkdin, int(json.getvalue('interns')), json.getvalue('educ'), int(json.getvalue('L1')), int(json.getvalue('L2')), int(json.getvalue('L3')), int(json.getvalue('L4')), int(json.getvalue('L5')), int(json.getvalue('M1')), int(json.getvalue('M2')), int(json.getvalue('M3')), int(json.getvalue('M4')), int(json.getvalue('M5')), int(json.getvalue('S1')), int(json.getvalue('S2')), int(json.getvalue('S3')), int(json.getvalue('S4')), int(json.getvalue('S5'))))
+    conn.commit()
     print "success"
 except:
     print "Unexpected error:", sys.exc_info()[0]
