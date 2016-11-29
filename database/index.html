@@ -144,6 +144,9 @@ function plot() {
   var xAxis = $('#xAxis').val();
   var yAxis = $('#yAxis').val();
   var schoolFilter = $('#schoolFilter').val();
+  if (schoolFilter === undefined) {
+    schoolFilter = '';
+  }
 
   $.ajax({
     type: "POST",
@@ -592,8 +595,7 @@ body {
 
 <!--Graph-->
 
-    <!--div id="graph" class="col-xs-12" style="display:none"-->
-    <div id="graph" class="col-xs-12">
+    <div id="graph" class="col-xs-12" style="display:none">
       <div class="col-sm-2"></div>
       <div class="col-xs-12 col-sm-8">
         <center><h3>What would you like to plot?</h3></center>
