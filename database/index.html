@@ -16,10 +16,6 @@
 var username = "";
 var password = "";
 
-function replaceWithGraph() {
-  $("#queryBasics").html('<div>Hi</div>');
-}
-
 function loggedIn() {
   $('#graph').show();
 }
@@ -172,32 +168,35 @@ function logout() {
 //------------------------------------------
 
 //University/College datalist import
-var dataList = document.getElementById('json-datalist');
-var input = document.getElementById('ajax');
-var request = new XMLHttpRequest();
-//handle request
-request.onreadystatechange = function(response) {
-  if (request.readyState === 4) {
-    if (request.status === 200) {
-      //parse JSON
-      var jsonOptions = JSON.parse(request.responseText);
-      jsonOptions.forEach(function(item) {
-        var option = document.createElement('option');
-        option.value = item;
-        //add element to datalist
-        dataList.appendChild(option);
-      });
-      input.placeholder = "University/College name";
+window.onload = function(){
+  var dataList = document.getElementById('json-datalist');
+  var input = document.getElementById('ajax');
+  var request = new XMLHttpRequest();
+  //handle request
+  request.onreadystatechange = function(response) {
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        //parse JSON
+        var jsonOptions = JSON.parse(request.responseText);
+        jsonOptions.forEach(function(item) {
+          var option = document.createElement('option');
+          option.value = item;
+          //add element to datalist
+          dataList.appendChild(option);
+        });
+        input.placeholder = "University/College name";
+      }
+      else {
+        input.placeholder = "Names could not be loaded";
+      }
     }
-    else {
-      input.placeholder = "Names could not be loaded";
-    }
-  }
-};
+  };
 
-//make request
-request.open('GET', 'http://crossorigin.me/http://cs.mcgill.ca/~ajolly3/USandCANunis.json', true);
-request.send();
+  //make request
+  request.open('GET', 'http://crossorigin.me/http://cs.mcgill.ca/~ajolly3/USandCANunis.json', true);
+  request.send();
+
+}
 
 </script>
 
@@ -593,7 +592,8 @@ body {
 
 <!--Graph-->
 
-    <div id="graph" class="col-xs-12" style="display:none">
+    <!--div id="graph" class="col-xs-12" style="display:none"-->
+    <div id="graph" class="col-xs-12">
       <div class="col-sm-2"></div>
       <div class="col-xs-12 col-sm-8">
         <center><h3>What would you like to plot?</h3></center>
@@ -623,7 +623,7 @@ body {
             </select>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="ajax" list="json-datalist" value="" placeholder="Filter by University/College (opt)">
+            <input type="text" class="form-control" id="ajax" list="json-datalist" placeholder="Filter by University/College (opt)">
             <datalist id="json-datalist"></datalist>
           </div>
         <button type="button" class="btn btn-primary" onclick="javascript:plot();">Submit</button>
