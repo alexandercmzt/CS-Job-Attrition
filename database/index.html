@@ -150,7 +150,7 @@ function plot() {
 
   $.ajax({
     type: "POST",
-    url: "plotter.py",
+    url: "plotter.cgi",
     data: {'xAxis':xAxis,'yAxis':yAxis,'schoolFilter':schoolFilter},
     success: function(result) {
       console.log("Success!");
