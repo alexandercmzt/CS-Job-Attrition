@@ -194,5 +194,8 @@ output_json = mpld3.fig_to_html(output_plot)
 
 print output_json
 
+with open("output.log", "w") as f:
+	f.write(output_json)
+
 conn.close()
 
