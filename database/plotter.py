@@ -3,10 +3,10 @@ import sqlite3
 from pprint import pprint
 import matplotlib.pyplot as plt, mpld3
 import numpy as np
-import sys, json
+import sys, json, cgi
+
 
 conn = sqlite3.connect("members.db")
-
 
 def get_columns(col_name, y_cols):
 	cols = []
@@ -63,8 +63,6 @@ def numerical_plot(x_var, y_var, scatter = False, school_filter = ""):
 		ax.plot(matrix[0],100*matrix[5]/matrix[1], 'go')
 
 
-
-
 # conn.execute('''CREATE TABLE MEMBERS
 #  		(UNAME TEXT PRIMARY KEY NOT NULL,
 #  		PASSWD TEXT NOT NULL,
@@ -100,8 +98,6 @@ def numerical_plot(x_var, y_var, scatter = False, school_filter = ""):
 # conn.execute("INSERT INTO MEMBERS (UNAME, PASSWD, CGPA, MGPA, GRAD, SCHOOL, MAJOR, SPONSOR, PORT, GITHUB, LNKDIN, INTERNS, EDUC, L1, L2, L3, L4, L5, M1, M2, M3, M4, M5, S1, S2, S3, S4, S5)"
 # 	"VALUES ('bob', 'pass123', 3.04, 3.45, 3, 'McGill University', 'Software Engineering', 1, 1, 0, 0, 2, 'Bachelors', 5, 2, 1, 0, 0, 7, 3, 2, 1, 1, 12, 5, 4, 1, 1)");
 # conn.commit()
-
-
 
 
 def categorical_plot(x_var, y_var, school_filter = ""):
@@ -176,20 +172,27 @@ def categorical_plot(x_var, y_var, school_filter = ""):
 		plt.tight_layout()
 	return fig
 
-# data = sys.stdin.read()
+
+
+json_input = cgi.FieldStorage()
+
+
+print "Content-Type: text/plain;charset=utf-8"
+print
+
 # j = json.loads(data)
-# if j['x'] in ["CGPA", "MGPA", "GRAD", "INTERNS"]:
-# 	output_plot = numerical_plot(j['x'], j['company_size'], school_filter = j['school'])
-# else:
-# 	output_plot = categorical_plot(j['x'], j['company_size'], school_filter = j['school'])
-# output_json = mpld3.fig_to_html(output_plot)
 
-# print output_json
+x = json_input.getvalue('xAxis')
+y = json_input.getvalue('yAxis')
+school = json_input.getvalue('schoolFilter')
 
-output_plot = numerical_plot('MGPA', 'large', school_filter = "University of Toronto")
+if x in ["CGPA", "MGPA", "GRAD", "INTERNS"]:
+	output_plot = numerical_plot(x, y, school_filter = school)
+else:
+	output_plot = categorical_plot(x, y, school_filter = school)
 output_json = mpld3.fig_to_html(output_plot)
+
 print output_json
-mpld3.show()
 
 conn.close()
 
