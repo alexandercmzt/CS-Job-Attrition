@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 import sqlite3
 from pprint import pprint
 import matplotlib.pyplot as plt, mpld3
@@ -62,7 +62,7 @@ def numerical_plot(x_var, y_var, scatter = False, school_filter = ""):
 		ax.plot(matrix[0],100*matrix[4]/matrix[1], 'bo')
 		ax.plot(matrix[0],100*matrix[5]/matrix[1], 'go')
 
-
+	return fig
 # conn.execute('''CREATE TABLE MEMBERS
 #  		(UNAME TEXT PRIMARY KEY NOT NULL,
 #  		PASSWD TEXT NOT NULL,
@@ -172,7 +172,9 @@ def categorical_plot(x_var, y_var, school_filter = ""):
 		plt.tight_layout()
 	return fig
 
-
+# with open('dum.log', 'w') as f:
+# 	f.write(mpld3.fig_to_html(numerical_plot('CGPA', 'large')))
+# raw_input()
 
 json_input = cgi.FieldStorage()
 
