@@ -145,14 +145,10 @@ function plot() {
   var xAxis = $('#xAxis').val();
   var yAxis = $('#yAxis').val();
   var schoolFilter = $('#schoolFilter').val();
-  if (schoolFilter === undefined) {
-    schoolFilter = '';
-  }
-  console.log(schoolFilter);
 
   $.ajax({
     type: "POST",
-    url: "demo.py",
+    url: "plotter.py",
     data: {'xAxis':xAxis,'yAxis':yAxis,'schoolFilter':schoolFilter},
     success: function(result) {
       console.log("Success!");
@@ -368,25 +364,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-#red {
-  background-color: red;
-  color: red;
-}
-
-#yellow {
-  background-color: yellow;
-  color: yellow;
-}
-
-#blue {
-  background-color: blue;
-  color: blue;
-}
-
-#green {
-  background-color: green;
-  color: green;
 }
 
 </style>
@@ -671,26 +648,6 @@ body {
           </div>
         <button type="button" class="btn btn-primary" onclick="javascript:plot();">Plot</button>
       </form>
-      <div id="legend">
-        <h3 class="text-center">Legend:</h3>
-        <div class="col-xs-12 col-sm-6">
-          <div class="col-xs-2" id="red">red</div>
-          <div class="col-xs-10"> = HR/screen interview or coding challenge</div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-          <div class="col-xs-2" id="yellow">yel</div>
-          <div class="col-xs-10"> = technical interview</div>
-        </div>
-        <div class="col-sm-12"></div>
-        <div class="col-xs-12 col-sm-6">
-          <div class="col-xs-2" id="blue">blu</div>
-          <div class="col-xs-10"> = on-site</div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-          <div class="col-xs-2" id="green">gre</div>
-          <div class="col-xs-10"> = offer</div>
-        </div>
-      </div>
       </div>
       <div class="col-sm-2"></div>
       <div class="col-xs-12" id="plotSpace">
