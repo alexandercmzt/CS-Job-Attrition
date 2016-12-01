@@ -151,7 +151,7 @@ function plot() {
 
   $.ajax({
     type: "POST",
-    url: "dummy.py",
+    url: "demo.py",
     data: {'xAxis':xAxis,'yAxis':yAxis,'schoolFilter':schoolFilter},
     success: function(result) {
       console.log("Success!");
