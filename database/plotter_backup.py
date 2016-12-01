@@ -121,6 +121,7 @@ def categorical_plot(x_var, y_var, school_filter = ""):
 		matrix[i] = map(float, matrix[i])
 
 	fig, ax = plt.subplots()
+	fig.set_size_inches(20,10)
 
 	if x_var in ['GITHUB', 'PORT', 'LNKDIN', 'SPONSOR']:
 		ymatrix = np.array(matrix).T.tolist()
@@ -198,10 +199,10 @@ def categorical_plot(x_var, y_var, school_filter = ""):
 
 name = sys.argv[1]
 
-output_plot = numerical_plot(name, 'large', school_filter= "McGill University")
+output_plot = categorical_plot(name, 'large')
 output_json = mpld3.fig_to_html(output_plot)
 
-with open("backup_plots/"+name + "-mcgill.backup", "w") as f:
+with open("backup_plots/"+name + ".backup", "w") as f:
 	f.write(output_json)
 f.close()
 conn.close()
