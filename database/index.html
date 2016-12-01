@@ -176,6 +176,7 @@ function logout() {
 window.onload = function(){
   var dataList = document.getElementById('json-datalist');
   var input = document.getElementById('ajax');
+  var input2 = document.getElementById('schoolFilter');
   var request = new XMLHttpRequest();
   //handle request
   request.onreadystatechange = function(response) {
@@ -190,9 +191,11 @@ window.onload = function(){
           dataList.appendChild(option);
         });
         input.placeholder = "University/College name";
+        input2.placeholder = "University/College name";
       }
       else {
         input.placeholder = "Names could not be loaded";
+        input2.placeholder = "Names could not be loaded";
       }
     }
   };
