@@ -11,10 +11,15 @@ print "Content-Type: text/plain;charset=utf-8"
 print
 
 x=json.getvalue('xAxis')
-s=json.getvalue('filterSchool')
+s=json.getvalue('schoolFilter')
 
-if "McGill" in s:
-	filename = "backup_plots/" + x + "-mcgill.backup"
+print s
+
+if s:
+	if "McGill" not in s:
+		filename = "backup_plots/" + x + ".backup"
+	else:
+		filename = "backup_plots/" + x + "-mcgill.backup"
 else:
 	filename = "backup_plots/" + x + ".backup"
 
