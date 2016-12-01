@@ -13,7 +13,7 @@ print
 x=json.getvalue('xAxis')
 s=json.getvalue('filterSchool')
 
-if s != "":
+if "McGill" in s:
 	filename = "backup_plots/" + x + "-mcgill.backup"
 else:
 	filename = "backup_plots/" + x + ".backup"
