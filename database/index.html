@@ -18,6 +18,7 @@ var password = "";
 
 function loggedIn() {
   $('#graph').show();
+  $('html, body').animate({scrollTop:$("#graph").offset().top}, 1000);
 }
 
 function wrongPwdError() {
@@ -205,6 +206,12 @@ window.onload = function(){
 
 <style>
 
+body {
+  font-family: 'Raleway';
+  font-weight: 500;
+  background-color: rgb(71,66,65);
+}
+
 .navbar .nav > li > a {
     color: #F5F5C3;
 }
@@ -237,17 +244,13 @@ window.onload = function(){
    background-color: #F5F5C3 !important;
 }
 
-body {
-  font-family: 'Raleway';
-  font-weight: 500;
-}
-
 #home {
-  background-image:url('http://res.cloudinary.com/dfhscxvt6/image/upload/v1478297999/jobhunt35_i8n5g4.png');
+  background-image:url('http://res.cloudinary.com/dfhscxvt6/image/upload/v1478297999/jobhunt35_i8n5g4.png') ;
   padding-top: 60px;
   padding-bottom: 100px;
   background-size: cover;
   margin-top: 25px;
+  background-color: white;
 }
 
 #title {
@@ -294,6 +297,7 @@ body {
   background-color: rgb(71,66,65);
   color: #F5F842;
   padding-top: 50px;
+  padding-bottom: 30px;
 }
 
 #queryBasics input {
@@ -327,9 +331,15 @@ body {
 #graph {
   background-color: rgb(71,66,65);
   color: #F5F842;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 
 #graph select {
+  background-color: #F5F5C3;
+}
+
+#graph input {
   background-color: #F5F5C3;
 }
 
@@ -346,6 +356,17 @@ body {
     background-color: #F5F5C3;
     border-color: #F5F842;
     color: rgb(71,66,65);
+}
+
+#placeHolder {
+  margin: 50px;
+  height: 400px;
+  background-color: white;
+  color: rgb(71,66,65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 }
 
 </style>
@@ -628,11 +649,15 @@ body {
             <input type="text" class="form-control" id="ajax" list="json-datalist" placeholder="Filter by University/College (opt)">
             <datalist id="json-datalist"></datalist>
           </div>
-        <button type="button" class="btn btn-primary" onclick="javascript:plot();">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="javascript:plot();">Plot</button>
       </form>
       </div>
       <div class="col-sm-2"></div>
-      <div class="col-xs-12" id="plotSpace"></div>
+      <div class="col-xs-12" id="plotSpace">
+        <div id="placeHolder">
+          <h1 class="text-center">Your graph will appear here.</h1>
+        </div>
+      </div>
     </div>
 
 <!--End-->
