@@ -13,8 +13,6 @@ print
 x=json.getvalue('xAxis')
 s=json.getvalue('schoolFilter')
 
-print s
-
 if s:
 	if "McGill" not in s:
 		filename = "backup_plots/" + x + ".backup"
